@@ -1,0 +1,15 @@
+[
+    {   "Day": "Sunday",
+        "DateStart" :"5.4.2010",
+    "TimeStart" :"17:00",
+    "DateEnd":"6.4.2010",
+    "TimeEnd":"07:00"}
+    ,
+    
+    {
+        "Day": "",
+        "DateStart" :"",
+        "TimeStart" :"",
+        "DateEnd":"",
+        "TimeEnd":""}
+    ]
