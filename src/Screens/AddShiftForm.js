@@ -13,7 +13,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View ,Image } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import {hideStartDateTimePicker,showStartDateTimePicker,hideEndDateTimePicker,showEndDateTimePicker}from '../Actions/AddAction'
+import {buttonPre,submitTheShift,hideStartDateTimePicker,showStartDateTimePicker,hideEndDateTimePicker,showEndDateTimePicker}from '../Actions/AddAction'
 import {connect} from 'react-redux';
 import {CardSection,Button} from '../Components/Common/index'
 
@@ -21,7 +21,11 @@ import {CardSection,Button} from '../Components/Common/index'
 
 
 class AddShiftForm extends Component {
-  
+
+
+  onSubmit(){
+    this.props.submitTheShift(this.props.startDateObj,this.props.endDateObj)
+  }
 //handling start
   _showStartDateTimePicker (){this.props.showStartDateTimePicker()}
 
@@ -39,11 +43,27 @@ class AddShiftForm extends Component {
   _hideEndDateTimePicker (){this.props.hideEndDateTimePicker()}
 
   _handleEndDatePicked = (date) => {
-    console.log('A date has been picked: ', date);
-    this.props.hideEndDateTimePicker()
-  };
+  //  console.log('A date has been picked: ', date);
+    this.props.hideEndDateTimePicker(date)//here i added date becouse got un defigned
 
+  };
+  //button pressebilety
+  makeButtonPresseble(){
+    if(this.props.startDateObj!==null&&this.props.endDateObj!==null)
+    if(((this.props.startDateObj).getTime()<(this.props.endDateObj).getTime())&&(this.props.isStartPicked===true)&&(this.props.isEndPicked===true)){
+     this.props.buttonPre(); 
+    }
+  
+  }
+renderButton(){
+  this.makeButtonPresseble()
+ // console.log("the status of button press : "+this.props.buttonPresseble)
+  if(this.props.buttonPresseble){
+    return ( <Button onPress={this.onSubmit.bind(this)}>submit</Button>)
+  }else{return(<Text>Choose bigining and the end of your shift</Text>)}
+}
   render () {
+   
     return (
       <View Style={{flex: 1 ,backgroundColor : '#c2f0f0' , padding : 5}} >
      
@@ -88,7 +108,10 @@ shadowOpacity : 0.5}}>
     
      </CardSection>
      
-     <CardSection  style={{justifyContent : 'center'}}><Button onPress={()=>{}}>submit</Button></CardSection>
+     <CardSection  style={{justifyContent : 'center'}}>
+     {this.renderButton()}
+    
+     </CardSection>
      </View>
 
     
@@ -119,9 +142,13 @@ const styles ={dateButtonStyle :{
 
 
 const mapStateToProps = ({ add }) => {
-  const { isStartDateTimePickerVisible , isEndDateTimePickerVisible} = add;
-
-  return { isStartDateTimePickerVisible ,isEndDateTimePickerVisible};
+  const { buttonPresseble, isStartDateTimePickerVisible , isEndDateTimePickerVisible ,startDateObj,isStartPicked ,endDateObj,isEndPicked} = add;
+//console.log("start date obj : "+startDateObj)
+//console.log("end date obj : "+endDateObj)
+if(endDateObj!==null)
+{
+  console.log("when end date picked it is : "+endDateObj.getYear())}
+  return {  buttonPresseble,isStartDateTimePickerVisible ,isEndDateTimePickerVisible,startDateObj,isStartPicked ,endDateObj,isEndPicked};
 };
 
 
@@ -132,7 +159,10 @@ export default connect (mapStateToProps,
     hideStartDateTimePicker,
     showStartDateTimePicker,
     hideEndDateTimePicker,
-    showEndDateTimePicker})
+    showEndDateTimePicker,
+    submitTheShift,
+    buttonPre
+  })
     (AddShiftForm)
 
 
@@ -142,6 +172,4 @@ export default connect (mapStateToProps,
 
 
 
-    /** </CardSection>
-     
-     <CardSection  style={{justifyContent : 'center'}}> */
+    /**  startDateObj,isStartPicked ,endDateObj,isEndPicked*/

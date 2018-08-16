@@ -40,6 +40,7 @@ class MainScreen extends Component{
                 </Picker>
                 <View style = {{flex : 2 ,padding :10 ,backgroundColor : '#eafafa' ,alignItems:'center',
     justifyContent:'center'} }>
+               
                 <TouchableOpacity 
   style={{ borderWidth:1,
     borderColor:'rgba(0,0,0,0.2)',

@@ -30,6 +30,9 @@ export const HIDE_END_DATE_TIME="hide_end_date_time"
 
 export const HANDLE_START = "handle_start"
 export const HANDLE_END = "handle_end"
+export const BUTTON_USE="button_use"
+export const SHIFT_ADDED = "shift_added"
+export const CURRMOUNTH_FETCH_SUCCESS="currmounth_fetch_success"
 /*
 export const UPDATE_START ="update_start"
 export const UPDATE_END = "update_end"

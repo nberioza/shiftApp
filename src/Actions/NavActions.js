@@ -5,10 +5,10 @@ export const changeScreenState=(value)=>{
     console.log(" this is value passed"+value)
     return (dispatch) => {
         dispatch({ type : SCREEN_VAL_CHANGE ,
-            payload : value });
+            payload : "" });
 
    
-    
+
     if (value === "watch_shifts")
     {
          Actions.initialScreen();
