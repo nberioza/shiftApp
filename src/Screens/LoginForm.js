@@ -3,6 +3,7 @@ import {View , Text} from 'react-native';
 import {Card,CardSection,Button,Input,Header,Spinner}from '../Components/Common';
 import {emailChanged ,passwordChanged,loginUser} from '../Actions/AuthActions';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 //the change that maide and need to be removed when testing in real invirement
 //remove the default values of email and password
 //
@@ -34,7 +35,9 @@ renderButton(){
     if(this.props.loading){
         return  <Spinner size="large"/>
     }else{
-       return  <Button onPress={this.onButtonPress.bind(this)}>Login </Button >
+       return <View><Button onPress={this.onButtonPress.bind(this)}>Login </Button >
+        <Button onPress={()=>Actions.logonForm()}>Logon</Button ></View>
+       
     }
 
 }
@@ -46,7 +49,7 @@ renderButton(){
     return(
         <Card>
              <CardSection>
-                <Header headerText='Manager'/>
+                <Header headerText='ShiftApp'/>
             </CardSection>
 
             <CardSection>

@@ -22,7 +22,7 @@ return {...state , isEndDateTimePickerVisible : action.payload , endDateObj : ac
 case  BUTTON_USE :
 return {...state , buttonPresseble : action.payload}
 case SHIFT_ADDED:
-return {...state ,INITIAL_STATE }
+return {...state ,...INITIAL_STATE }
 
 default :
 return state ;

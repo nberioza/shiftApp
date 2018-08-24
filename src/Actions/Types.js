@@ -33,6 +33,14 @@ export const HANDLE_END = "handle_end"
 export const BUTTON_USE="button_use"
 export const SHIFT_ADDED = "shift_added"
 export const CURRMOUNTH_FETCH_SUCCESS="currmounth_fetch_success"
+
+export const START_BUTTON_ON = "start_buttom_on"
+export const START_BUTTON_OFF="start_button_off"
+export const USER_UPDATE="user_update"
+export const LOGON_USER = "logon_user"
+export const LOGON_USER_SUCCESS="logon_user_succes"
+export const LOGON_USER_FAIL="logon_user_fail"
+
 /*
 export const UPDATE_START ="update_start"
 export const UPDATE_END = "update_end"

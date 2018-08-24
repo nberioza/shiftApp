@@ -4,6 +4,7 @@ import MainScreen from './MainScreen'
 import InitialScreen from './InitialScreen'
 import AddShiftForm from './AddShiftForm'
 import LoginForm from './LoginForm'
+import LogonForm from './LogonForm'
 
 
 const RouterComponent = ()=>{
@@ -18,7 +19,13 @@ return (
      initial
      hideNavBar
      />
-    
+    <Scene
+     key="logonForm" 
+     title='Logon' 
+     component={LogonForm}
+     backTitle='back'
+     //hideNavBar
+     />
     <Scene key='shiftScreen'>
     <Scene
      key="mainScreen" 

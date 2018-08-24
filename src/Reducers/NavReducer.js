@@ -6,7 +6,6 @@ switch(action.type){
 case SCREEN_VAL_CHANGE :
 return {...state , value : action.payload }
 
-
     default :
     return state ;
 }

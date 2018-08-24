@@ -76,7 +76,7 @@ export const submitTheShift=(start,end)=>{
     var mounthYearModel = starMounth.concat("_",startYear);
    
     const {currentUser}=firebase.auth();
- //   console.log("current usser id is "+currentUser.uid)
+console.log("(login )current user id is "+currentUser.uid)
 return(dispatch)=>{
     firebase.database()
     .ref('users/'+currentUser.uid+'/'+mounthYearModel)

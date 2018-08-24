@@ -6,9 +6,11 @@ settings
 send report
 */
 import React , {Component} from 'react';
-import {View , Picker,Button ,TouchableOpacity,Image }from 'react-native';
+import {View , Picker ,TouchableOpacity,Image }from 'react-native';
 import {connect} from 'react-redux';
 import {changeScreenState} from '../Actions/NavActions';
+import {ToggleButton} from '../Components/Common/ToggleButton';
+import {turnTheShiftOn,TurnTheShiftOff} from '../Actions/ShiftAction'
 
 
 class MainScreen extends Component{
@@ -18,7 +20,14 @@ class MainScreen extends Component{
         console.log(this.props.value)
        
     }
-   
+    buttonHandler(){
+        if(!this.props.isWorking){
+            this.props.turnTheShiftOn()
+        }
+        else{
+            this.props.TurnTheShiftOff(this.props.start)
+        }
+    }
        
     
     render(){
@@ -40,7 +49,45 @@ class MainScreen extends Component{
                 </Picker>
                 <View style = {{flex : 2 ,padding :10 ,backgroundColor : '#eafafa' ,alignItems:'center',
     justifyContent:'center'} }>
+              
+              <ToggleButton 
+              onPress={this.buttonHandler.bind(this)} 
+              title={this.props.buttonStateName}
+             
+              ></ToggleButton>
+                </View>
                
+
+                </View>
+          )
+      
+    }
+
+    
+
+
+}
+const mapStateToProps = ({shiftButton,nav})=>{
+  
+   
+    const {value} = nav ;
+    const {buttonStateName,isWorking ,start,buttonStyle} = shiftButton ;
+    console.log(shiftButton)
+    console.log(nav)
+    return {value,buttonStateName,isWorking ,start,buttonStyle};
+}
+export default connect (mapStateToProps,{changeScreenState,turnTheShiftOn,TurnTheShiftOff})(MainScreen)
+
+
+
+/* <Button style= {{ flex : 2 ,
+     alignItems:'center',
+     alignSelf : "center" ,
+     backgroundColor : '#85e0e0', borderWidth: 1 , borderColor : 'black' ,borderRadius:10 ,margin : 2  }}
+                 title="press"
+                 
+                 ></Button> */
+                 /*
                 <TouchableOpacity 
   style={{ borderWidth:1,
     borderColor:'rgba(0,0,0,0.2)',
@@ -59,31 +106,5 @@ class MainScreen extends Component{
   <Image 
  style={{height:'100%' , width : '100%' ,borderRadius :100}} source={require('./roundButton.jpg')} 
   />
-</TouchableOpacity>
-                </View>
-               
-
-                </View>
-          )
-      
-    }
-
-    
-
-
-}
-const mapStateToProps = ({nav})=>{
-    const {value} = nav ;
-    return {value};
-}
-export default connect (mapStateToProps,{changeScreenState})(MainScreen)
-
-
-
-/* <Button style= {{ flex : 2 ,
-     alignItems:'center',
-     alignSelf : "center" ,
-     backgroundColor : '#85e0e0', borderWidth: 1 , borderColor : 'black' ,borderRadius:10 ,margin : 2  }}
-                 title="press"
-                 
-                 ></Button> */
+   //styles={this.props.buttonStyle}
+</TouchableOpacity> */
