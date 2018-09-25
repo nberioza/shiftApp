@@ -5,7 +5,10 @@ import {CURRMOUNTH_FETCH_SUCCESS,SHOW_START_DATE_TIME,
      SHOW_END_DATE_TIME,
       HIDE_END_DATE_TIME,
     HANDLE_START,
-HANDLE_END,BUTTON_USE,SHIFT_ADDED} from './Types'
+HANDLE_END,
+BUTTON_USE,SHIFT_ADDED,
+CHOSEN_MONTH_FETCH_SUCCESS,
+YEAR_MONTH_INITIATION,YEAR_CHANGE} from './Types'
 import {firebase} from '../Components/Common/Firebase'
 import {Actions} from 'react-native-router-flux'
 
@@ -110,4 +113,31 @@ console.log()
         
     }
     
+}
+export const updateYearAndMounth=()=>{
+    const currDate= new Date()
+    return {
+        type : YEAR_MONTH_INITIATION,
+        year: (String)(currDate.getFullYear()),
+        month : (String)(currDate.getMonth())
+    }
+}
+
+export const fetchMonthToDisplay =(yearMonth,month)=>{
+    const {currentUser}=firebase.auth();
+    return(dispatch)=>{
+        console.log("in fm return")
+        firebase.database()
+        .ref('users/'+currentUser.uid+'/'+yearMonth)
+        .on('value',snapshot=>
+        {dispatch({type : CHOSEN_MONTH_FETCH_SUCCESS ,month:month,payload : snapshot.val()})})
+        
+    }
+}
+
+export const chYear=(year)=>{
+ return{
+     type:YEAR_CHANGE ,
+     payload:year
+ }
 }

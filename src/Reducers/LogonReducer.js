@@ -1,7 +1,7 @@
 import {USER_UPDATE,LOGON_USER ,LOGON_USER_SUCCESS,LOGON_USER_FAIL} from  '../Actions/Types'
 
 
-INITIAL_STATE={
+const INITIAL_STATE={
     user : '',
     name :'',
 secName :'',
@@ -21,7 +21,7 @@ switch(action.type){
     case LOGON_USER:
     return {...state ,loading : true};
     case LOGON_USER_SUCCESS:
-    return {...state ,...INITIAL_STATE ,[action.payload.prop]:action.payload.value};
+    return {...state ,INITIAL_STATE ,[action.payload.prop]:action.payload.value};
     case LOGON_USER_FAIL:
     return {...state ,error :'Loging failed',loading:false};
 

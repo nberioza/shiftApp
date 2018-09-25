@@ -1,21 +1,23 @@
 
 import {START_BUTTON_ON,START_BUTTON_OFF}  from '../Actions/Types';
-INITIAL_STATE = {
+
+
+const INITIAL_STATE = {
     buttonStateName :'Start Shift',
-  //  buttonStyle : {backgroundColor : '#adff2f'},
+    buttonStyle : {backgroundColor : '#cbd8af'},
     isWorking : false ,
     start :''
 
 }
 
 
-export default (...state = INITIAL_STATE , action)=>{
+export default (state = INITIAL_STATE , action)=>{
+    console.log(state)
     switch(action.type){
     case START_BUTTON_ON :
-    console.log("before change in  START_BUTTON_ON"+state)
-    return {...state , buttonStateName : "End Shift", isWorking :true , start : action.start}
+    return {...state , buttonStateName : "End Shift", isWorking :true , start : action.start ,buttonStyle :{backgroundColor :'#ef0000'}}
     case START_BUTTON_OFF :
-    console.log("before change in  START_BUTTON_OFF"+state)
+    
     return {...state ,...INITIAL_STATE , buttonStateName :"Start Shift"}
     
         default :

@@ -40,8 +40,11 @@ export const USER_UPDATE="user_update"
 export const LOGON_USER = "logon_user"
 export const LOGON_USER_SUCCESS="logon_user_succes"
 export const LOGON_USER_FAIL="logon_user_fail"
-
+export const CHOSEN_MONTH_FETCH_SUCCESS="chosen_month_fetch_success"
+export const YEAR_MONTH_INITIATION ="year_month_initiation"
+//ctrl shift p ->transform to lower..
 /*
 export const UPDATE_START ="update_start"
 export const UPDATE_END = "update_end"
 */
+export const YEAR_CHANGE ="year_change"

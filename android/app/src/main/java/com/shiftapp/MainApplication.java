@@ -1,13 +1,15 @@
 package com.shiftapp;
 
 import android.app.Application;
-
+import com.rnfs.RNFSPackage; // <------- add package
 import com.facebook.react.ReactApplication;
+//import com.chirag.RNMail.RNMail;
+import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.chirag.RNMail.*; 
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,13 +21,16 @@ public class MainApplication extends Application implements ReactApplication {
       return BuildConfig.DEBUG;
     }
 
+    // ...
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+        new MainReactPackage(),
+            new RNMail(),
+            new RNFSPackage()// <---- add comma
+       
       );
     }
-
     @Override
     protected String getJSMainModuleName() {
       return "index";

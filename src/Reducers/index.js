@@ -13,10 +13,10 @@ export default combineReducers(
       ShiftsData : DataReducer,
       ShiftView :  ShiftsViewReducer,
       auth : AuthReducer ,
-      nav : NavReducer,
-      add : AddReducer,
-      shiftButton : ButtonShiftReducer,
-      logon :LogonReducer
+      nav : NavReducer ,
+      add : AddReducer ,
+      shiftButton : ButtonShiftReducer ,
+      logon : LogonReducer,
 }
 
 )

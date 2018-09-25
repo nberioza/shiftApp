@@ -1,5 +1,6 @@
 package com.shiftapp;
-
+import com.rnfs.RNFSPackage; // <------- add package
+import com.chirag.RNMail.*; 
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -12,4 +13,11 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "shiftApp";
     }
+  /**  @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(), // <---- add comma
+        new RNFSPackage() // <---------- add package
+      );
+    }*/
 }

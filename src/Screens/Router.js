@@ -5,6 +5,7 @@ import InitialScreen from './InitialScreen'
 import AddShiftForm from './AddShiftForm'
 import LoginForm from './LoginForm'
 import LogonForm from './LogonForm'
+import EditReportForm from './EditReportForm'
 
 
 const RouterComponent = ()=>{
@@ -33,6 +34,13 @@ return (
      component={MainScreen}
      rigthTitle='sec'
      initial
+     hideNavBar
+     />
+      <Scene
+     key="editReportInfo" 
+     title='Edit report' 
+     component={EditReportForm}
+     //rigthTitle='sec'
      hideNavBar
      />
     <Scene

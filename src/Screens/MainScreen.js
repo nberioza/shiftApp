@@ -37,15 +37,16 @@ class MainScreen extends Component{
             
             >
                   <Picker style={{height : 50 ,width : 100 ,backgroundColor : '#85e0e0', borderWidth: 2 , borderColor : '#330000' ,borderRadius: 5 ,margin : 2 , padding:3, } }
-                  mode = "dropdown"
+                 
+                 mode = "dropdown"
                 selectedValue={this.props.value}
                  onValueChange={this.chstateValue.bind(this)}
                   >
-                  <Picker.Item label="test" value="test"  />
+                  <Picker.Item label="menu" value="menu"  />
                       <Picker.Item label="Watch Shifts" value="watch_shifts" style= {{borderColor : '#3d3d29',borderWidth : 2}}  />
                       <Picker.Item label="Add Shift" value="add_shift" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
                       <Picker.Item label="Settings" value="settings" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
-                      <Picker.Item label="Send report" value="send_report" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
+                      <Picker.Item label="Send shifts" value="send_shifts" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
                 </Picker>
                 <View style = {{flex : 2 ,padding :10 ,backgroundColor : '#eafafa' ,alignItems:'center',
     justifyContent:'center'} }>
@@ -53,6 +54,7 @@ class MainScreen extends Component{
               <ToggleButton 
               onPress={this.buttonHandler.bind(this)} 
               title={this.props.buttonStateName}
+              style={this.props.buttonStyle}
              
               ></ToggleButton>
                 </View>

@@ -1,5 +1,10 @@
 import {Actions} from 'react-native-router-flux'
 import {SCREEN_VAL_CHANGE} from './Types'
+import {Alert }from 'react-native';
+
+import RNFS from 'react-native-fs'
+import Mailer from 'react-native-mail';
+
 
 export const changeScreenState=(value)=>{
     console.log(" this is value passed"+value)
@@ -16,6 +21,44 @@ export const changeScreenState=(value)=>{
      if (value === 'add_shift'){
                Actions.addShifScreen();
                console.log("in if statement add screen manu ")
+     }
+     if(value === 'send_shifts'){
+    // Works on both iOS and Android
+    let pathOfFile='file://'+RNFS.ExternalStorageDirectoryPath + '/sheetjs'
+    console.log(pathOfFile)
+Alert.alert(
+ 
+    'Send Shift report',
+    'Do you want to send report to test@gmail from ...to ',
+    [
+      {text: 'Edit', onPress: () => Actions.editReportInfo()},
+      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      {text: 'Send', onPress:  () => {
+        Mailer.mail({
+          subject: 'lets send mail',
+          recipients: ['netanel_berioza@walla.com'],
+        ccRecipients: ['netanel_berioza@walla.com'],
+        bccRecipients: ['netanelberioza30@gmail.com'],
+          body: '<b>A Bold Body</b>',
+          isHTML: true,
+          attachment: {
+            path: pathOfFile ,  // The absolute path of the file from which to read data.
+            type: 'xlsx',   // Mime Type: jpg, png, doc, ppt, html, pdf
+            name: 'sheetjs.xlsx',   // Optional: Custom filename for attachment
+          }
+        }, (error, event) => {
+          Alert.alert(
+            error,
+            event,
+            [
+              {text: 'Ok', onPress: () => console.log('OK: Email Error Response')},
+              {text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response')}
+            ],
+            { cancelable: true }
+          )
+        });
+      }}]
+  )
      }
     }
 }

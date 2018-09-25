@@ -28,15 +28,20 @@ renderError(){
     }
 }
 onButtonPress(){
-const {email , password}= this.props;
-this.props.loginUser({email,password});
+//const {email , password}= this.props;
+//this wethoud should be changed in order to authanticate
+
+this.props.loginUser({email:"test@gmail.com",password:"123abc"});
 }
 renderButton(){
     if(this.props.loading){
-        return  <Spinner size="large"/>
+        return <CardSection><Spinner size="large"/></CardSection>
     }else{
-       return <View><Button onPress={this.onButtonPress.bind(this)}>Login </Button >
-        <Button onPress={()=>Actions.logonForm()}>Logon</Button ></View>
+       return  <CardSection style={{
+           // flexDirection : 'column',
+            justifyContent :'space-between',
+            alignItems : 'center'}} ><Button onPress={this.onButtonPress.bind(this)}>Login </Button >
+        <Button onPress={()=>Actions.logonForm()}>Sign up</Button ></CardSection > 
        
     }
 
@@ -71,9 +76,9 @@ renderButton(){
                 />
                 </CardSection>
                 {this.renderError()}
-            <CardSection>
+           
           {this.renderButton()}
-            </CardSection>
+         
             </Card>
         
     );

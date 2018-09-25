@@ -23,7 +23,8 @@ export const passwordChanged = (text)=>{
 export const loginUser = ({ email, password }) => {
     return (dispatch) => {
       dispatch({ type: LOGIN_USER });
-  
+  //for dev purpes email and pass should come back in diployment
+
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => loginUserSuccess(dispatch, user))
         .catch((error) =>loginUserFail(dispatch) );
