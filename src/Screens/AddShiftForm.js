@@ -15,8 +15,8 @@ import { Text, TouchableOpacity, View ,Image } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {buttonPre,submitTheShift,hideStartDateTimePicker,showStartDateTimePicker,hideEndDateTimePicker,showEndDateTimePicker}from '../Actions/AddAction'
 import {connect} from 'react-redux';
-import {CardSection,Button} from '../Components/Common/index'
-
+import {CardSection,Button, Card} from '../Components/Common/index'
+import {Actions} from 'react-native-router-flux'
 
 
 
@@ -65,9 +65,16 @@ renderButton(){
   render () {
    
     return (
-      <View Style={{flex: 1 ,backgroundColor : '#c2f0f0' , padding : 5}} >
-     
-      <CardSection style = {{justifyContent : 'center',
+      <Card  style={{flex:1}} >
+       <CardSection style = {{
+        flex :1,
+        alignItem : 'start'}}>
+         
+         <Button onPress= {()=>Actions.pop()}>Back</Button>
+         </CardSection>
+      <CardSection style = {{
+        flex :1,
+        justifyContent : 'center',
 alignItems:'center' ,
 shadowOffset : {width: 10 ,height: 10},
 shadowColor : 'black',
@@ -108,11 +115,13 @@ shadowOpacity : 0.5}}>
     
      </CardSection>
      
-     <CardSection  style={{justifyContent : 'center'}}>
+     <CardSection  style={{flex :1,justifyContent : 'center'}}>
      {this.renderButton()}
     
      </CardSection>
-     </View>
+     <CardSection  style={{flex :3,justifyContent : 'center'}}>
+     </CardSection>
+     </Card>
 
     
      

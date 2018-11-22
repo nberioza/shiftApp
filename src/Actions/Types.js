@@ -48,3 +48,4 @@ export const UPDATE_START ="update_start"
 export const UPDATE_END = "update_end"
 */
 export const YEAR_CHANGE ="year_change"
+export const REPORT_SENT="report_sent"

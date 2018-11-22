@@ -2,9 +2,8 @@ import {Actions} from 'react-native-router-flux'
 import {SCREEN_VAL_CHANGE} from './Types'
 import {Alert }from 'react-native';
 
-import RNFS from 'react-native-fs'
+import {ExternalStorageDirectoryPath } from 'react-native-fs';
 import Mailer from 'react-native-mail';
-
 
 export const changeScreenState=(value)=>{
     console.log(" this is value passed"+value)
@@ -24,7 +23,7 @@ export const changeScreenState=(value)=>{
      }
      if(value === 'send_shifts'){
     // Works on both iOS and Android
-    let pathOfFile='file://'+RNFS.ExternalStorageDirectoryPath + '/sheetjs'
+    const pathOfFile = ExternalStorageDirectoryPath+ "/"
     console.log(pathOfFile)
 Alert.alert(
  
@@ -37,14 +36,14 @@ Alert.alert(
         Mailer.mail({
           subject: 'lets send mail',
           recipients: ['netanel_berioza@walla.com'],
-        ccRecipients: ['netanel_berioza@walla.com'],
-        bccRecipients: ['netanelberioza30@gmail.com'],
+       // ccRecipients: ['netanel_berioza@walla.com'],
+       // bccRecipients: ['netanelberioza30@gmail.com'],
           body: '<b>A Bold Body</b>',
           isHTML: true,
           attachment: {
-            path: pathOfFile ,  // The absolute path of the file from which to read data.
+            path: pathOfFile+"sheetjs.xlsx ",  // The absolute path of the file from which to read data.
             type: 'xlsx',   // Mime Type: jpg, png, doc, ppt, html, pdf
-            name: 'sheetjs.xlsx',   // Optional: Custom filename for attachment
+           // name: 'sheetjs.xlsx',   // Optional: Custom filename for attachment
           }
         }, (error, event) => {
           Alert.alert(

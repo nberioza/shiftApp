@@ -4,6 +4,7 @@ import {CURRMOUNTH_FETCH_SUCCESS,YEAR_MONTH_INITIATION,CHOSEN_MONTH_FETCH_SUCCES
 const INITIAL_STATE ={
   yearToDisplay: '',
   monthToDisplay : '',
+  aOa:[],
   data :'',
   dataLoaded : false}
 export default (state = INITIAL_STATE , action) => {

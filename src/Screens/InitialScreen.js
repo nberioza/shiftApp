@@ -5,8 +5,13 @@ import { connect } from 'react-redux';
 import {Button,Card,CardSection,Row,Spinner} from '../Components/Common';
 import {Actions}from 'react-native-router-flux';
 import {getShiftObj} from '../Actions/ShiftAction';
-import{chYear,fetchCurrentMounth,fetchMonthToDisplay,updateYearAndMounth}from '../Actions/AddAction'
+import{chYear,
+  fetchCurrentMounth,
+  fetchMonthToDisplay,updateYearAndMounth}from '../Actions/AddAction'
+  import{reportCreate}from '../Actions/ShiftAction'
 //import { runInThisContext } from 'vm';?
+
+
 
 class Initial extends Component {
   componentWillMount(){
@@ -17,7 +22,11 @@ class Initial extends Component {
     this.props.fetchCurrentMounth()
     
   }
-  
+  //creates/updates xlsx file .then should open email
+  reportPressed(){
+//pass aOa to action method
+this.props.reportCreate(this.props.aOa)
+  }
  
   showSpinner(){
      if(!(this.props.dataLoaded)){
@@ -89,13 +98,14 @@ this.props.chYear(year)
   console.log(year)
  console.log(this.props.currentMounth)
       return (
-        <Card >
-         
-         <CardSection>
+        <Card style={{flex:1}}>
+        {/** frst cardSection */}
+         <CardSection style={{flex:1}}>
          
          <Button onPress= {()=>Actions.pop()}>Back</Button>
          </CardSection>
-         <CardSection>
+         {/** second cardSection */}
+         <CardSection style={{flex:1}} >
            
          <Picker style={{height : 50 ,width : 100 ,backgroundColor : '#85e0e0', borderWidth: 2 , borderColor : '#330000' ,borderRadius: 5 ,margin : 2 , padding:3, } }
                  
@@ -125,10 +135,17 @@ this.props.chYear(year)
    >{year.map((value,index)=>{
     return<Picker.Item value={value} label={value} key={index}/>
   })}</Picker>
+  <Button  onPress={this.reportPressed.bind(this)}>send report</Button>
         {/**this.renderYearPicker()*/}
          </CardSection>
          {this.showSpinner()}  
-         <FlatList
+        
+        
+        
+        
+         <CardSection style={{flex : 8}}>
+         {/** third card section */}  
+         <FlatList 
      ListHeaderComponent={<Row
       startDate = "started"
       startShTime = "from"
@@ -148,7 +165,7 @@ this.props.chYear(year)
    }}
 keyExtractor={item=>item.uid}
 /> 
-        
+</CardSection>      
        
 
         </Card>
@@ -167,13 +184,25 @@ keyExtractor={item=>item.uid}
    shift : 'monday'
    ,id : "khfkja154fd44fd45444"}*/
 });
-console.log("inside mapStateToProps  the current mounth  :"+currentMounth)
-    return {currentMounth , data ,dataLoaded,monthToDisplay,yearToDisplay}
+const aOa=currentMounth.map((val ,index)=>{
+ var arr=[]
+ arr[0]=val.startDay
+ arr.push(val.startTime)
+ arr.push(val.endTime)
+ arr.push(val.overAll)
+  return  arr
+ 
+})
+console.log("inside mapStateToProps  the current mounth  :")
+console.log(currentMounth)
+console.log("inside mapStateToProps  the tryOut  :")
+console.log(aOa)
+    return { aOa,currentMounth , data ,dataLoaded,monthToDisplay,yearToDisplay}
     
    
   }
 
-  export default  connect(mapStateToProps,{chYear,fetchCurrentMounth,fetchMonthToDisplay,updateYearAndMounth})(Initial)
+  export default  connect(mapStateToProps,{reportCreate,chYear,fetchCurrentMounth,fetchMonthToDisplay,updateYearAndMounth})(Initial)
 
 // {this.renderRow()}
 

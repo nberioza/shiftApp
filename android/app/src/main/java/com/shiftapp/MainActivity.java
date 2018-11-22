@@ -13,6 +13,7 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "shiftApp";
     }
+   
   /**  @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(

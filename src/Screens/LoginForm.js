@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {View , Text} from 'react-native';
+import {View , Text,Dimensions} from 'react-native';
 import {Card,CardSection,Button,Input,Header,Spinner}from '../Components/Common';
 import {emailChanged ,passwordChanged,loginUser} from '../Actions/AuthActions';
 import {connect} from 'react-redux';
@@ -7,6 +7,8 @@ import {Actions} from 'react-native-router-flux';
 //the change that maide and need to be removed when testing in real invirement
 //remove the default values of email and password
 //
+//const window = Dimensions.get('window');
+
 class LoginForm extends Component {
 
 
@@ -52,7 +54,20 @@ renderButton(){
     render(){
 
     return(
-        <Card>
+        <View
+        style={{
+            //
+            
+         height:"100%",
+          // minHeight: "initial",
+            
+            backgroundColor: '#4c69a5',
+            //flex: 1,
+          }}
+       
+        >
+        <Card  style={{flex:1/3
+        }}>
              <CardSection>
                 <Header headerText='ShiftApp'/>
             </CardSection>
@@ -80,6 +95,7 @@ renderButton(){
           {this.renderButton()}
          
             </Card>
+            </View>
         
     );
 }

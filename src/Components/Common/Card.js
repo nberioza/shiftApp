@@ -1,18 +1,21 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View,Dimensions} from 'react-native';
 
 const Card =(props)=> {
-return(<View  style = {styles.containerStyle}>
+return(<View  style = {[styles.containerStyle, props.style]}>
 {props.children}
 </View>);
 
 
 };
 
-
+const window=Dimensions.get("screen")
 const styles = {
 
     containerStyle : {
+      // backgroundColor:"black",
+     //flex:1,
+     // height:window/2,
         borderWidth :1 ,
         borderRadius : 2 ,
         borderColor : '#ddd',

@@ -13,6 +13,7 @@ style={[styles.containerStyle , props.style]}
 };
 const styles = {
 containerStyle : {
+   flex:1,
     margin : 2 ,
     borderBottomWidth : 1,
     padding :5 ,

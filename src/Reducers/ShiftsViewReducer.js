@@ -1,4 +1,4 @@
-import {WRITE_TO_ROW } from '../Actions/Types'
+import {WRITE_TO_ROW,REPORT_SENT } from '../Actions/Types'
 
 const initialState = 
     {table : [
@@ -15,6 +15,8 @@ const initialState =
          switch(action.type){
             case WRITE_TO_ROW :
             return {...state , table : action.payload};
+            case REPORT_SENT:
+            return state;
            default :
            return state ;
          }
