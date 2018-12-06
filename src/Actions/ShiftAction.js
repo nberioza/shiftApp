@@ -1,7 +1,11 @@
-import {Alert} from 'react-native'
+import {Alert,AsyncStorage} from 'react-native'
 import {firebase} from '../Components/Common/Firebase'
 import XLSX from 'xlsx';
-import {WRITE_TO_ROW,WRITE_TO_SHIFT_LIST,START_BUTTON_ON,START_BUTTON_OFF,REPORT_SENT} from './Types'
+import {WRITE_TO_ROW,WRITE_TO_SHIFT_LIST
+  ,START_BUTTON_ON
+  ,START_BUTTON_OFF
+  ,REPORT_SENT,
+  UPDATE_BTN_STATE} from './Types'
 //import RNFetchBlob from 'rn-fetch-blob';
 //const RNFetchBlob = require('rn-fetch-blob').default
 //shift data is json in json format
@@ -14,32 +18,74 @@ const output = str => str;
 const input =str => str
 
 export const turnTheShiftOn=()=>{
-var date = new Date()
-return {
+  return(dispatch)=>{
+//if exist merge/update with status on and the date
+  var date = new Date()
+  AsyncStorage.mergeItem('IN_OUT_SHIFT_STATE',
+  JSON.stringify({
+    isWorking : true ,
+    startDate : date
+ }),
+ ()=>{dispatch({
   type : START_BUTTON_ON ,
   start : date ,
-}
+}) })
+
 }
 
-export const TurnTheShiftOff=(start)=>{
+}
+//we will need it only if the user is working
+export const button_update=(result)=>{
+return (dispatch)=>{
+  if (result.isWorking){//if true
+    dispatch({type :UPDATE_BTN_STATE})
+  }
+}
+}
+//we wont need start here
+export const TurnTheShiftOff=(startz)=>{
+  //update the status off and fetch the starting point
+  return(dispatch)=>{
   var end = new Date()
-  var starMounth = (String)(start.getMonth());
-  var startYear =(String)(start.getFullYear());
-  var mounthYearModel = starMounth.concat("_",startYear);
- 
+  console.log("ent time obj",end)
+  
+  AsyncStorage.getItem('IN_OUT_SHIFT_STATE',(err,result)=>{
+    console.log("result from shiftoff",result)
+    
+    let stateAndDate=JSON.parse(result)
+   
+    let start = new Date(stateAndDate.startDate)
+
+    console.log("the date obj",start.getMonth())
+    let starMounth = (String)(start.getMonth());
+    let startYear =(String)(start.getFullYear());
+    let mounthYearModel = starMounth.concat("_",startYear);
+    
+    AsyncStorage.mergeItem('IN_OUT_SHIFT_STATE',
+    JSON.stringify({   //sec argument updating the value
+      isWorking : false,
+      startDate : ""
+   }),
+   ()=>{ //third argument the ca
+    
   const {currentUser}=firebase.auth();
-//   console.log("current usser id is "+currentUser.uid)
-return(dispatch)=>{
-  firebase.database()
-  .ref('users/'+currentUser.uid+'/'+mounthYearModel)
-  .push({startDay :start.toLocaleDateString(),
-      startTime : start.toLocaleTimeString(),
-      endDay: end.toLocaleDateString(),
-   endTime : end.toLocaleTimeString(),
-  overAll : ((end.getTime()-start.getTime())/(60*60*1000 ))   })
-  .then(()=>{
-      dispatch({type :START_BUTTON_OFF})
-      })
+  //   console.log("current usser id is "+currentUser.uid)
+  
+    firebase.database()
+    .ref('users/'+currentUser.uid+'/'+mounthYearModel)
+    .push({startDay :start.toLocaleDateString(),
+        startTime : start.toLocaleTimeString(),
+        endDay: end.toLocaleDateString(),
+     endTime : end.toLocaleTimeString(),
+    overAll : ((end.getTime()-start.getTime())/(60*60*1000 ))   })
+    .then(()=>{
+        dispatch({type :START_BUTTON_OFF})
+        })
+   })
+  })
+ 
+ 
+ 
 }
 }
 

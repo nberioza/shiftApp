@@ -28,6 +28,7 @@ export const HIDE_START_DATE_TIME="hide_start_date_time"
 export const SHOW_END_DATE_TIME="show_end_date_time"
 export const HIDE_END_DATE_TIME="hide_end_date_time"
 
+export const UPDATE_BTN_STATE="update_btn_state"
 export const HANDLE_START = "handle_start"
 export const HANDLE_END = "handle_end"
 export const BUTTON_USE="button_use"

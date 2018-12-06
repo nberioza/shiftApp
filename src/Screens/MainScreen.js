@@ -6,18 +6,48 @@ settings
 send report
 */
 import React , {Component} from 'react';
-import {View , Picker ,TouchableOpacity,Image }from 'react-native';
+import {View , Picker ,TouchableOpacity,Image ,AsyncStorage}from 'react-native';
 import {connect} from 'react-redux';
 import {changeScreenState} from '../Actions/NavActions';
 import {ToggleButton} from '../Components/Common/ToggleButton';
-import {turnTheShiftOn,TurnTheShiftOff} from '../Actions/ShiftAction'
+import {turnTheShiftOn,TurnTheShiftOff,button_update} from '../Actions/ShiftAction'
 
 
 class MainScreen extends Component{
- 
+    componentDidMount(){
+        let stateAndDate
+        AsyncStorage.getItem('IN_OUT_SHIFT_STATE', (err, result) => {
+         
+            if(!result){
+            console.log("there were no result")
+             //setting initialparams
+             let initStateAndDate = {
+                isWorking : false ,
+                startDate : ""
+             }
+             stateAndDate=initStateAndDate;
+             this.props.button_update(stateAndDate)
+             console.log("initial",stateAndDate)
+             AsyncStorage.setItem('IN_OUT_SHIFT_STATE',JSON.stringify(initStateAndDate))
+           }
+           else{ 
+                 AsyncStorage.getItem('IN_OUT_SHIFT_STATE', (err, result) => {
+                     stateAndDate=JSON.parse(result)
+                     this.props.button_update(stateAndDate)
+                     console.log("from the storage",stateAndDate)
+                  })
+         
+          }
+        }
+          )
+        //check the asyncMemory what is the state in/out of shift
+        //if there is error// no key val create current key state out of shift
+        //if there is key return it to programm state redux
+
+    }
     chstateValue(value){
         this.props.changeScreenState(value)
-        console.log(this.props.value)
+      //  console.log(this.props.value)
        
     }
     buttonHandler(){
@@ -74,11 +104,11 @@ const mapStateToProps = ({shiftButton,nav})=>{
    
     const {value} = nav ;
     const {buttonStateName,isWorking ,start,buttonStyle} = shiftButton ;
-    console.log(shiftButton)
-    console.log(nav)
+   // console.log(shiftButton)
+   // console.log(nav)
     return {value,buttonStateName,isWorking ,start,buttonStyle};
 }
-export default connect (mapStateToProps,{changeScreenState,turnTheShiftOn,TurnTheShiftOff})(MainScreen)
+export default connect (mapStateToProps,{changeScreenState,turnTheShiftOn,TurnTheShiftOff,button_update})(MainScreen)
 
 
 
