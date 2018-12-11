@@ -9,8 +9,10 @@ import React , {Component} from 'react';
 import {View , Picker ,TouchableOpacity,Image ,AsyncStorage}from 'react-native';
 import {connect} from 'react-redux';
 import {changeScreenState} from '../Actions/NavActions';
-import {ToggleButton} from '../Components/Common/ToggleButton';
+import {ToggleButton } from '../Components/Common/ToggleButton';
+
 import {turnTheShiftOn,TurnTheShiftOff,button_update} from '../Actions/ShiftAction'
+import {logOutUser }from '../Actions/AuthActions'
 
 
 class MainScreen extends Component{
@@ -46,7 +48,11 @@ class MainScreen extends Component{
 
     }
     chstateValue(value){
-        this.props.changeScreenState(value)
+      if(value==="log_out"){
+      this.props.logOutUser()
+      }else{ 
+           this.props.changeScreenState(value)}
+      
       //  console.log(this.props.value)
        
     }
@@ -72,11 +78,12 @@ class MainScreen extends Component{
                 selectedValue={this.props.value}
                  onValueChange={this.chstateValue.bind(this)}
                   >
-                  <Picker.Item label="menu" value="menu"  />
-                      <Picker.Item label="Watch Shifts" value="watch_shifts" style= {{borderColor : '#3d3d29',borderWidth : 2}}  />
+                  <Picker.Item label="Menu" value=""  />
+                      <Picker.Item label="View Shifts" value="watch_shifts" style= {{borderColor : '#3d3d29',borderWidth : 2}}  />
                       <Picker.Item label="Add Shift" value="add_shift" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
                       <Picker.Item label="Settings" value="settings" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
                       <Picker.Item label="Send shifts" value="send_shifts" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
+                      <Picker.Item label="Log-Out" value="log_out" style= {{borderColor : '#3d3d29',borderWidth : 2}}/>
                 </Picker>
                 <View style = {{flex : 2 ,padding :10 ,backgroundColor : '#eafafa' ,alignItems:'center',
     justifyContent:'center'} }>
@@ -108,7 +115,7 @@ const mapStateToProps = ({shiftButton,nav})=>{
    // console.log(nav)
     return {value,buttonStateName,isWorking ,start,buttonStyle};
 }
-export default connect (mapStateToProps,{changeScreenState,turnTheShiftOn,TurnTheShiftOff,button_update})(MainScreen)
+export default connect (mapStateToProps,{changeScreenState,turnTheShiftOn,TurnTheShiftOff,button_update,logOutUser})(MainScreen)
 
 
 

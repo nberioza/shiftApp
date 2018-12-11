@@ -1,4 +1,4 @@
-import {EMAIL_CHANGED, PASSWORD_CHANGED,LOGIN_USER_SUCCESS,LOGIN_USER_FAIL,LOGIN_USER} from '../Actions/Types'
+import {EMAIL_CHANGED, PASSWORD_CHANGED,LOGIN_USER_SUCCESS,LOGIN_USER_FAIL,LOGIN_USER,LOGGED_OUT} from '../Actions/Types'
 //the instant_state is more for uderstanding what are the properties in the state
 const INITIAL_STATE = {
      
@@ -22,6 +22,8 @@ case LOGIN_USER_SUCCESS:
 return {...state ,...INITIAL_STATE, user : action.payload};
 case LOGIN_USER_FAIL :
 return {...state, error:'authantication failed',loading : false};
+case LOGGED_OUT :
+return {...state ,INITIAL_STATE}
     default :
 return state ;
 }

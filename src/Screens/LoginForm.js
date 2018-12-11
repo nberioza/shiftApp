@@ -7,10 +7,17 @@ import {Actions} from 'react-native-router-flux';
 //the change that maide and need to be removed when testing in real invirement
 //remove the default values of email and password
 //
+import {firebase} from '../Components/Common/Firebase'
 //const window = Dimensions.get('window');
 
 class LoginForm extends Component {
-
+componentDidMount(){
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            Actions.shiftScreen();
+        }
+  })
+}
 
     onEmailChange(text){
        this.props.emailChanged(text)
@@ -30,10 +37,10 @@ renderError(){
     }
 }
 onButtonPress(){
-//const {email , password}= this.props;
-//this wethoud should be changed in order to authanticate
+const {email , password}= this.props;
 
-this.props.loginUser({email:"test@gmail.com",password:"123abc"});
+
+this.props.loginUser({email:email,password: password});
 }
 renderButton(){
     if(this.props.loading){
@@ -124,9 +131,9 @@ return {
 }*/
 
 const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading } = auth;
+    const { email, password, error, loading ,user} = auth;
   
-    return { email, password, error, loading };
+    return { email, password, error, loading ,user};
   };
   
 

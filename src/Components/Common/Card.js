@@ -18,7 +18,7 @@ const styles = {
      // height:window/2,
         borderWidth :1 ,
         borderRadius : 2 ,
-        borderColor : '#ddd',
+        borderColor : 'hsl(235, 6%, 38%)',//'#ddd'
         borderBottomWidth : 0,
         shadowColor : '#000',
         shadowOffset : {width : 0 , height : 2},

@@ -6,6 +6,7 @@ import AddShiftForm from './AddShiftForm'
 import LoginForm from './LoginForm'
 import LogonForm from './LogonForm'
 import EditReportForm from './EditReportForm'
+import  SettingsScreen   from './SettingsScreen'
 
 
 const RouterComponent = ()=>{
@@ -55,6 +56,13 @@ return (
       key='addShifScreen'
       title='Add a shift' 
       component={AddShiftForm}
+      rigthTitle='init'
+     hideNavBar
+      />
+      <Scene
+      key='settingsScreen'
+      title='Settings' 
+      component={SettingsScreen}
       rigthTitle='init'
      hideNavBar
       />

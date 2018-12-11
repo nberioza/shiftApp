@@ -13,7 +13,13 @@ export const changeScreenState=(value)=>{
 
    
 
-    if (value === "watch_shifts")
+   
+            if (value === "settings")
+            {
+                 Actions.settingsScreen();
+               //  console.log("in if statement whatch shift")}
+            }
+            if (value === "watch_shifts")
     {
          Actions.initialScreen();
          console.log("in if statement whatch shift")}
@@ -64,6 +70,3 @@ Alert.alert(
 
 //key='secScreen'
 //AddShiftForm
-/* <Picker.Item label="Add Shift" value="add_shift"
-                      <Picker.Item label="Settings" value="settings" 
-                      <Picker.Item label="Send report" value="send_report"  */

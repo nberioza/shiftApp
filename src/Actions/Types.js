@@ -5,6 +5,7 @@ export const PASSWORD_CHANGED='password_changed';
 export const LOGIN_USER_SUCCESS= 'login_user_success';
 export const LOGIN_USER_FAIL='login_user_fail';
 export const LOGIN_USER ='login_user';
+export const LOGGED_OUT = 'logged_out'
 export const EMPLOYEES_NAME_CHANGED ='employees_name_changed';
 export const EMPLOYEES_PHONE_CHANGED='employees_phone_changed';
 export const CREAT_EEMPLOYEE='create_employee';

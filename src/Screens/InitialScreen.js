@@ -14,7 +14,8 @@ import{chYear,
 
 
 class Initial extends Component {
-  componentWillMount(){
+ // componentWillMount(){
+   componentDidMount(){
    //updating to the state the year and the month
    this.props.updateYearAndMounth()
    console.log("componentWillMount")
