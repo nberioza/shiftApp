@@ -14,25 +14,29 @@ export const userUpdate=({prop , value})=>{
    // export const logError(text)
 
     export const logUserOn=({name,secName,email,password})=>{
-     
+       
         return(dispatch)=>{
             //try to logon
             dispatch({type:LOGON_USER})
             //create user
             firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(user => logonUserSuccess(dispatch, user))
+            .then(user =>{ 
+                const {currentUser} = firebase.auth()
+                logonUserSuccess(dispatch, user)
+                firebase.database().ref('users/'+currentUser.uid +'/name').push(
+                       {   emailDestination : email ,
+                           fstName : name ,
+                           secName : secName
+                       }
+                   ).then(()=>{
+                   
+                    console.log("success ")})
+               })
             .catch(() => logonUserFail(dispatch));
            //living entery with name
            //
            //decomposition you are not creating new object here just extracting
-           const {currentUser} = firebase.auth()
-           
-         firebase.database().ref('users/'+currentUser.uid +'/name').push(
-                {
-                    fstName : name ,
-                    secName : secName
-                }
-            ).then(()=>{console.log("success ")})
+          
 
         }
         }

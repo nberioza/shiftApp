@@ -66,11 +66,12 @@ if(this.props.errorPass){
     render(){
 
     return(
-        <Card>
+        <View style={{backgroundColor: '#4c69a5',flex: 1,
+          }}>
+          <Card style={{flex:3/4}}>
              <CardSection>
                 <Header headerText='Log-On'/>
             </CardSection>
-            
             <CardSection>
             <Input
                 label='First name'
@@ -78,7 +79,6 @@ if(this.props.errorPass){
                onChangeText={value=>this.props.userUpdate({prop :'name',value})}
                 value={this.props.name}
                 />
-
                </CardSection>
                <CardSection>
                <Input
@@ -87,9 +87,7 @@ if(this.props.errorPass){
                onChangeText={value=>this.props.userUpdate({prop :'secName',value})}
                 value={this.props.secName}
                 />
-
                </CardSection>
-          
             <CardSection>
             <Input
                 secureTextEntry
@@ -117,17 +115,14 @@ if(this.props.errorPass){
                onChangeText={value=>this.props.userUpdate({prop :"email",value})}
                 value={this.props.email}
                 />
-
                </CardSection>
-             
                <CardSection>
-                  
                    <Button onPress={this.onButtonPress.bind(this)}>Submit</Button>
                </CardSection>
               { this.renderSpiner()}
               { this.renderER()}
             </Card>
-       // value=>this.props.employeeUpdate({prop : 'name' ,value })
+            </View>
     );
 }
 

@@ -18,7 +18,7 @@ class Initial extends Component {
    componentDidMount(){
    //updating to the state the year and the month
    this.props.updateYearAndMounth()
-   console.log("componentWillMount")
+
     //displaying current month
     this.props.fetchCurrentMounth()
     
@@ -96,8 +96,7 @@ this.props.chYear(year)
     strval = value.toString()
     year.push(strval)
   }
-  console.log(year)
- console.log(this.props.currentMounth)
+ 
       return (
         <Card style={{flex:1}}>
         {/** frst cardSection */}
@@ -173,10 +172,11 @@ keyExtractor={item=>item.uid}
       );
     }
   }
-  const mapStateToProps=({ShiftsData,ShiftView})=>{
-   const {table} =ShiftView
-   const {data,dataLoaded,monthToDisplay,yearToDisplay}=ShiftsData
- console.log(data)
+  const mapStateToProps=({ShiftsData,ShiftView,auth})=>{
+   const {table} =ShiftView;
+   const {user}=auth ;
+   const {data,dataLoaded,monthToDisplay,yearToDisplay}=ShiftsData;
+ 
  const currentMounth =_.map(data,(val,uid)=>{
   return {...val , uid}
   /*the end product would be  an array(this is what _.map does) of object types:
@@ -185,6 +185,7 @@ keyExtractor={item=>item.uid}
    shift : 'monday'
    ,id : "khfkja154fd44fd45444"}*/
 });
+
 const aOa=currentMounth.map((val ,index)=>{
  var arr=[]
  arr[0]=val.startDay
@@ -194,10 +195,12 @@ const aOa=currentMounth.map((val ,index)=>{
   return  arr
  
 })
-console.log("inside mapStateToProps  the current mounth  :")
+
+
+/*console.log("inside mapStateToProps  the current mounth  :")
 console.log(currentMounth)
 console.log("inside mapStateToProps  the tryOut  :")
-console.log(aOa)
+console.log(aOa)*/
     return { aOa,currentMounth , data ,dataLoaded,monthToDisplay,yearToDisplay}
     
    

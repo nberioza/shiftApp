@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {Alert,AsyncStorage} from 'react-native'
 import {firebase} from '../Components/Common/Firebase'
 import XLSX from 'xlsx';
@@ -108,9 +109,9 @@ export const reportCreate = (data)=>{
 //"explain" what coulmns to occupy
 //make sure that the first row is the discriptions of the columns
 aOa=[...[["date","from","to","overall"]],...data]
-return(dispatch)=>{
+return(dispatch,)=>{
 const ws = XLSX.utils.aoa_to_sheet(aOa);
-
+const {currentUser}=firebase.auth()
 		/* build new workbook */
 		const wb = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, "ShiftApp");
@@ -124,24 +125,33 @@ const ws = XLSX.utils.aoa_to_sheet(aOa);
     readFile(file ,'ascii' )
      .then((resfile) =>{
          let formData = new FormData();
+         
        // fileToSend =XLSX.read(resfile,{type :'binary'})
-       stat(file).then((st)=>{ console.log('stat',st)})
+    //   stat(file).then((st)=>{ console.log('stat',st)})
              
-      
-       // formData.append('sheetjs', resfile)
-      //  formData.append('price','12')
+   
+      const ref=  firebase.database().ref('users/'+currentUser.uid+'/'+"name")
+     .once("value")
+       .then((snapshot)=>{
+       //
+       var infoObj= snapshot.val()
+       var infoArr = Object.values(infoObj)
+       console.log("infoArr",infoArr)
+      const {emailDestination ,fstName ,secName}=infoArr[0]
       let fileUri="file://"+file
 const sendFile = {uri: fileUri,
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         name: 'sheetjs.xlsx',
       }
-      console.log("file uri : ",fileUri)
-      console.log("the path is",file)
-     
       //formData.append('sheetjs', resfile.uri)
       formData.append('sheetjs', sendFile)
+      formData.append('firstName',fstName)
+      formData.append('secondName',secName)
+      formData.append('email',emailDestination )
+  
+     
       console.log(formData)
-     fetch('http://10.0.0.5:3000/uploads', {
+     fetch('http://192.168.50.1:3000/uploads', {
        method: 'POST',
         body: formData,
  }).then((data) =>{ 
@@ -153,12 +163,14 @@ const sendFile = {uri: fileUri,
     })
     .catch((err)=>{console.log(err)
     })
-      
-       
-   
   }) .catch((err)=>{console.log(err)
   })
         
+       })
+     
+       // formData.append('sheetjs', resfile)
+      //  formData.append('price','12')
+    
  //   }).catch((err) => { Alert.alert("exportFile Error", "Error " + err.message); });
 /** headers: 
         new Headers( {"Accept": "application/vnd.ms-excel ","Content-Type":"multipart/form-data"})
@@ -190,8 +202,4 @@ const sendFile = {uri: fileUri,
         console.log(err)
       })*/ 
 
- const bin2ascii = (bin)=> {
-        return bin.reverse().join('').match(/.{8}/g).map(
-          x => String.fromCharCode(parseInt(x, 2))
-        ).join('');
-    }
+ 
