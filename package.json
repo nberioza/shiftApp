@@ -13,7 +13,7 @@
     "navigation": "^5.1.0",
     "npm": "^6.4.0",
     "react": "16.3.1",
-    "react-native": "0.55.4",
+    "react-native": "0.70.2",
     "react-native-fs": "^2.11.15",
     "react-native-mail": "^3.0.6",
     "react-native-modal-datetime-picker": "^6.0.0",
